@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const contactsRouter = require("./app/routes/contact.route");
 const ApiError = require("./app/api-error");
+const ContactService = require("./app/services/contact.service");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use((req, res, next) => {
     return next(new ApiError(404, "Resource not found"));
 });
   
-  app.use((error, req, res, next) => {
+app.use((error, req, res, next) => {
       res.status(error.statusCode || 500).json({
         error: {
           status: error.statusCode || 500,
@@ -22,5 +23,5 @@ app.use((req, res, next) => {
         },
       });
     });
-
+    
 module.exports = app;
